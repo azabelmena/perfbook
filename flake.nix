@@ -21,6 +21,8 @@
       perfbook = pkgs.mkShell{
         name = "perfbook";
 
+        PERFBOOK_PAPER = "A4";
+
         nativeBuildInputs = with pkgs; [
           autoconf
           automake
