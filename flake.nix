@@ -75,5 +75,20 @@
         exit
       '';
     };
+
+    help-perfbook = pkgs.mkShell{
+      name = "help-perfbook";
+
+      shellHook = ''
+        echo "Outputing help!"
+        make help-full
+
+        echo "Make sure to clean build environment with:\n"
+        echo "nix develop .#clean-perfbook"
+
+        echo "Exiting!"
+        exit
+      '';
+    };
   };
 }
