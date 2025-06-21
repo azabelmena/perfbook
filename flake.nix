@@ -24,7 +24,7 @@
   {
 
     devShells.${system} = {
-      build-perfbook = pkgs.mkShell{
+      build = pkgs.mkShell{
         name = "build";
 
         PERFBOOK_PAPER = "A4";
@@ -63,7 +63,7 @@
       };
     };
 
-    clean-perfbook = pkgs.mkShell{
+    clean = pkgs.mkShell{
       name = "clean";
 
       shellHook = ''
@@ -93,7 +93,7 @@
       '';
     };
 
-    update-perfbook = pkgs.mkShell{
+    update = pkgs.mkShell{
       name = "update";
 
       shellHook = ''
