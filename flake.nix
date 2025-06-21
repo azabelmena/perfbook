@@ -91,6 +91,25 @@
       '';
     };
 
+    update-perfbook = pkgs.mkShell{
+      name = "update-perfbook";
+
+      shellHook = ''
+        echo "Updating perfbook!"
+        echo "Fetching Upstream!"
+        git fetch upstream
+
+        echo "Merging Upstream!"
+        git merge upstream/master
+
+        echo "Pushing Upstream!"
+        git push -u origin main
+
+        echo "Exiting!"
+        exit
+      '';
+    };
+
     help = pkgs.mkShell{
       name = "help";
 
