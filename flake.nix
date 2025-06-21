@@ -13,9 +13,11 @@
     let
     system = "x86_64-linux";
 
-  perfbook-1c = "perfbook-1c.pdf";
-  perfbook-eb = "perfbook-eb.pdf";
-  perfbook-hb = "perfbook-hb.pdf";
+    perfbook-1c = "perfbook-1c.pdf";
+    perfbook-eb = "perfbook-eb.pdf";
+    perfbook-hb = "perfbook-hb.pdf";
+
+    home = "~/perfbook/";
 
   pkgs = nixpkgs.legacyPackages.${system};
   in
@@ -29,14 +31,14 @@
 
         nativeBuildInputs = with pkgs; [
           autoconf
-            automake
-            coreutils
-            ghostscript
-            gnuplot
-            graphviz
-            inkscape
-            texliveFull
-            transfig
+          automake
+          coreutils
+          ghostscript
+          gnuplot
+          graphviz
+          inkscape
+          texliveFull
+          transfig
         ];
 
         shellHook = ''
@@ -110,6 +112,32 @@
       '';
     };
 
+    mkshell = pkgs.mkShell{
+      name = "perfbook";
+
+        PERFBOOK_PAPER = "A4";
+
+        nativeBuildInputs = with pkgs; [
+          autoconf
+          automake
+          coreutils
+          ghostscript
+          gnuplot
+          graphviz
+          inkscape
+          texliveFull
+          transfig
+        ];
+
+        shellHook = ''
+          echo "Entering shell!"
+          echo "Using bash!"
+
+          echo "Entering build directory!"
+          cd ${home}
+        '';
+    };
+
     help = pkgs.mkShell{
       name = "help";
 
@@ -120,8 +148,10 @@
         echo "Options:"
         echo "build-perfbook -- builds the perfbook PDF on specific targets (see help-perfbook for targets)."
         echo "clean-perfbook -- removes build targets and cleans perfbook build environment."
-        echo "help-perfbook -- prints help information for building perfbook."
         echo "update-perfbook -- updates the perfbook git repository from upstream."
+        echo "mkshell -- Enter dev shell for manual interaction with build environment."
+        echo "help-perfbook -- prints help information for building perfbook."
+        echo "help -- prints help information for nix flake."
 
         echo "Exiting!"
         exit
