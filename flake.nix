@@ -25,7 +25,7 @@
 
     devShells.${system} = {
       build-perfbook = pkgs.mkShell{
-        name = "build-perfbook";
+        name = "build";
 
         PERFBOOK_PAPER = "A4";
 
@@ -64,7 +64,7 @@
     };
 
     clean-perfbook = pkgs.mkShell{
-      name = "clean-perfbook";
+      name = "clean";
 
       shellHook = ''
         echo "Cleaning PDF files!"
@@ -94,7 +94,7 @@
     };
 
     update-perfbook = pkgs.mkShell{
-      name = "update-perfbook";
+      name = "update";
 
       shellHook = ''
         echo "Updating perfbook!"
