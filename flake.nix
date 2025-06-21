@@ -34,6 +34,17 @@
           texliveFull
           transfig
         ];
+
+        shellHook = ''
+          echo "Building!"
+          make
+
+          echo "Cleaning build environment!"
+          make clean
+
+          echo "Exiting!"
+          exit
+        '';
       };
     };
   };
