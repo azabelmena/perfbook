@@ -83,8 +83,26 @@
         echo "Outputing help!"
         make help-full
 
-        echo "Make sure to clean build environment with:\n"
+        echo "Make sure to clean build environment with:"
         echo "nix develop .#clean-perfbook"
+
+        echo "Exiting!"
+        exit
+      '';
+    };
+
+    help = pkgs.mkShell{
+      name = "help";
+
+      shellHook = ''
+        echo "Run:"
+        echo "nix develop .#<option>"
+
+        echo "Options:"
+        echo "build-perfbook -- builds the perfbook PDF on specific targets (see help-perfbook for targets)."
+        echo "clean-perfbook -- removes build targets and cleans perfbook build environment."
+        echo "help-perfbook -- prints help information for building perfbook."
+        echo "update-perfbook -- updates the perfbook git repository from upstream."
 
         echo "Exiting!"
         exit
