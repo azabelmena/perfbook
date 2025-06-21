@@ -60,5 +60,20 @@
         '';
       };
     };
+
+    clean-perfbook = pkgs.mkShell{
+      name = "clean-perfbook";
+
+      shellHook = ''
+        echo "Cleaning PDF files!"
+        rm *.pdf
+
+        echo "Cleaning build environment!"
+        make clean
+
+        echo "Exiting!"
+        exit
+      '';
+    };
   };
 }
