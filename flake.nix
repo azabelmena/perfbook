@@ -1,9 +1,9 @@
 {
 
   description = ''Nix Flake for Compiling the Perfbook:
-  Is Parallel Programming Hard, And, If So, What Can You Do About It?
-  https://cdn.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html
-  '';
+    Is Parallel Programming Hard, And, If So, What Can You Do About It?
+    https://cdn.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html
+    '';
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
@@ -13,31 +13,44 @@
     let
     system = "x86_64-linux";
 
+  perfbook-1c = "perfbook-1c.pdf";
+  perfbook-eb = "perfbook-eb.pdf";
+  perfbook-hb = "perfbook-hb.pdf";
+
   pkgs = nixpkgs.legacyPackages.${system};
   in
   {
 
     devShells.${system} = {
-      perfbook = pkgs.mkShell{
-        name = "perfbook";
+      build-perfbook = pkgs.mkShell{
+        name = "build-perfbook";
 
         PERFBOOK_PAPER = "A4";
 
         nativeBuildInputs = with pkgs; [
           autoconf
-          automake
-          coreutils
-          ghostscript
-          gnuplot
-          graphviz
-          inkscape
-          texliveFull
-          transfig
+            automake
+            coreutils
+            ghostscript
+            gnuplot
+            graphviz
+            inkscape
+            texliveFull
+            transfig
         ];
 
         shellHook = ''
-          echo "Building!"
+          echo "Building Perfbook!"
           make
+
+          echo "Building ${perfbook-1c}!"
+          make ${perfbook-1c}
+
+          echo "Building ${perfbook-eb}!"
+          make ${perfbook-eb}
+
+          echo "Building ${perfbook-hb}!"
+          make ${perfbook-hb}
 
           echo "Cleaning build environment!"
           make clean
